@@ -1,0 +1,4 @@
+
+
+1) webpack was running, and then finishing.
+solution: looked into the package.json, checked the function calling webpack. The code was incomplete.
