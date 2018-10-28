@@ -2,3 +2,26 @@
 
 1) webpack was running, and then finishing.
 solution: looked into the package.json, checked the function calling webpack. The code was incomplete.
+
+2) when in teh browser, if I click a beer I get it on it's own, with more data. If i click again, it shows the next beer..... strange!
+-- theory! it's because somewhere I've said 'display beer using index' and elsewhere i've used the id.
+FIND IT!
+beer model line 55
+and then
+specificview line 30
+I spent about 2 hours trying to find the best solution to this problem. In the end I had to alter the ID of the specific beer upon publishing a single beer:
+  bottle.id = bottle.id -1
+
+FULLY CORRECTED IN
+Beerdata:
+
+// method to publish data of sepcific thing.
+BeerData.prototype.specificBeerDetails = function (index) {
+  // console.log("here's the full data", this.data);
+  const numero = index -1;
+  const specificBeer = this.data[numero];
+
+  // console.log("detail is now", specificBeer);
+  //that is an object of the beer
+  PubSub.publish('Beer_model:specific-beer-data-ready', specificBeer)
+};
